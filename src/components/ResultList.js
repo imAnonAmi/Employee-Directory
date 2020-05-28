@@ -1,10 +1,12 @@
 import React from "react";
 
 function ResultList(props) {
+ 
   return (
     <table className="table">
+      
       {props.results.map(result => (
-        <table>
+        <table styleName="width:100%" key={result.id}>
           <tr>
             <th>First Name</th>
             <th>Last Name</th>
@@ -18,7 +20,7 @@ function ResultList(props) {
         </table>
       ))}
     </table>
-  );
-}
+  )
+};
 
 export default ResultList;
