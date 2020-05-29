@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import SearchForm from "./SearchForm";
 import ResultList from "./ResultList";
 import API from "../utils/API";
-import EmployeeCard from "./EmployeeCard";
+
 
 class SearchResultContainer extends Component {
   state = {
     result: [],
+    filteredUser: [],
     search: "",
     filter: "",
     filterBy: "lastName",
@@ -18,15 +19,8 @@ class SearchResultContainer extends Component {
   componentDidMount() {
     API.search()
       .then(res => this.setState({ 
-        result: res.data.results.map((event,index) => ({
-          firstName: event.name.first,
-          lastName: event.name.last,
-          picture: event.picture.large,
-          email: event.email,
-          phone: event.phone,
-          dob: event.age,
-          key: index
-        }))
+        result: res.data.results,
+        filteredUser: res.data.results
        }))
       .catch(err => console.log(err));
   };
@@ -54,9 +48,22 @@ class SearchResultContainer extends Component {
     console.log("----handleFormSubmit firing---");
     console.log(value);
     console.log(name);
-    this.filterEmployees(value);
-    this.filterEmployees(this.state.search);
+   this.filterEmployees();
+   // this.filterEmployees(this.state.search);
   };
+
+
+  filterEmployees = (value) => { console.log("Search result: ", this.state.search)
+    const newArray = this.state.filteredUser.filter(item => {
+      // merge data together, then see if user input is anywhere inside
+      let values = Object.values(item)
+        .join("")
+        .toLowerCase();
+      return values.indexOf(this.state.search.toLowerCase()) !== -1;
+    });
+    console.log(newArray);
+    this.setState({ filteredUser: newArray})
+  }
 
   //Not sure I did the below correctly. Come back and review when other components are done. Basing first part off of API activity, and table part is taking friends activity and mapping values from randomuser API to a table instead of UL.
   render() {
@@ -64,7 +71,7 @@ class SearchResultContainer extends Component {
     <div className="container">
       <div className="row">
         <div className="col-lg-12">
-          <h1>RANDOM CO.Employee Directory</h1>
+          <h1>RANDOM CO. Employee Directory</h1>
         </div>
       </div>
       <div className="row">
@@ -74,7 +81,7 @@ class SearchResultContainer extends Component {
           handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
         />
-        <ResultList results={this.state.results} />
+        <ResultList result={this.state.filteredUser} />
       </div>
       </div>
     
@@ -90,16 +97,7 @@ class SearchResultContainer extends Component {
 
           </tr>
 
-          {[...this.state.result].map((item) =>
-          <EmployeeCard
-            picture={item.picture}
-            firstName={item.firstName}
-            lastName={item.lastName}
-            email={item.email}
-            phone={item.phone}
-            dob={item.dob}
-            key={item.key} />
-          )}
+
 
         </table>
       </div>

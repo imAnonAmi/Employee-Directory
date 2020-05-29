@@ -1,24 +1,34 @@
 import React from "react";
+import EmployeeCard from "./EmployeeCard";
 
 function ResultList(props) {
- 
+  console.log(props.result);
   return (
-    <table className="table">
-      
-      {props.results.map(result => (
-        <table styleName="width:100%" key={result.id}>
+    <table className = "table">
+      <table styleName = "width:100%">
           <tr>
+            <th>Employee Photo</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Age</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>D.O.B.</th>
           </tr>
-          <tr>
-            <td>Andrew</td>
-            <td>Wade</td>
-            <td>44</td>
-          </tr>
-        </table>
+      {props.result.map(item => (
+        
+      
+          <EmployeeCard
+            picture={item.picture.large}
+            firstName={item.name.first}
+            lastName={item.name.last}
+            email={item.email}
+            phone={item.phone}
+            dob={item.dob.date}
+             />
+
+        
       ))}
+    </table>
     </table>
   )
 };
