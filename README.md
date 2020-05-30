@@ -13,7 +13,7 @@ Unit 19 Homework: React Employee Directory
 * Questions
 
 ## Description
-This React based Employee Directory allows a user to search employess by entering a query in the Search box. This query can be a string (including a name fragment)or integers; the search is conducted across all columns. The directory is also filterable by the Email and Phone table headings.
+This React based Employee Directory allows a user to search employess by entering a query in the Search box. This query can be a string (including a name fragment) or integers; the search is conducted across all columns. The directory is also filterable by the Email and Phone table headings.
 
 ## Installation
 Repository at: https://github.com/imAnonAmi/employee-directory
