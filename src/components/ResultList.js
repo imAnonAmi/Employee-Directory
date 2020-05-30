@@ -3,7 +3,7 @@ import React from "react";
 
 const useSortableData = (items, config = null) => {
   const [sortConfig, setSortConfig] = React.useState(config);
-
+console.log("Sortconfig: ", sortConfig);
   const sortedItems = React.useMemo(() => {
     let sortableItems = [...items];
     if (sortConfig !== null) {
@@ -84,15 +84,7 @@ const ResultList = (props) => {
               Phone
             </button>
           </th>
-          <th>
-            <button
-              type="button"
-              onClick={() => requestSort('id.dob.age')}
-              className={getClassNamesFor('id.dob.age')}
-            >
-              Age
-            </button>
-          </th>
+          <th>Age</th>
           </tr>
         </thead>
         <tbody>
