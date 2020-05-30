@@ -1,4 +1,4 @@
-# Employee Directoyry
+# Employee Directory
 Unit 19 Homework: React Employee Directory
 
 ## Table of Contents
